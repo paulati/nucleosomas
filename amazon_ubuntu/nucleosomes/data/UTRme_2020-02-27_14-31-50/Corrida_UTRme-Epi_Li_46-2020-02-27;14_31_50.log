@@ -1,0 +1,86 @@
+2020-02-27 14:31:50,474 - UTRme - INFO - 
+> WELCOME TO UTRme: A Scoring-Based Tool to Annotate Untranslated Regions in Trypanosomatid Genomes
+
+2020-02-27 14:32:08,971 - UTRme - INFO - > Running cutadapt quality and adapter filtering!
+
+2020-02-27 14:32:08,971 - UTRme - INFO - cutadapt --quiet -e 0.05 --cores 30 --overlap 5 -a AGATCGGAAGAGC$ -A AGATCGGAAGAGC$ --quality-base 33 -o /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/qr1.fastq.gz -p /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/qr2.fastq.gz /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/Corrida_UTRme-Epi_Li_46-merged_1.fastq.gz /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/Corrida_UTRme-Epi_Li_46-merged_2.fastq.gz
+2020-02-27 14:47:15,179 - UTRme - INFO - cutadapt quality and adapter filtering had a execution time of: 00:15:06.21
+2020-02-27 14:47:16,257 - UTRme - INFO - > Running bedtools sorting!
+
+2020-02-27 14:47:16,258 - UTRme - INFO - bedtools sort -i /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/temp.gff
+2020-02-27 14:47:16,361 - UTRme - INFO - bedtools sorting had a execution time of: 00:00:00.10
+2020-02-27 14:47:16,362 - UTRme - INFO - > Running faidx!
+
+2020-02-27 14:47:16,362 - UTRme - INFO - faidx /home/psmircich/disco8/UTRme_Epi_Li_v49/genoma/TriTrypDB-46_TcruziCLBrenerEsmeraldo-like_Genome.fasta -i chromsizes
+2020-02-27 14:47:16,524 - UTRme - INFO - faidx had a execution time of: 00:00:00.16
+2020-02-27 14:47:16,584 - UTRme - INFO - > Running bedtools complement!
+
+2020-02-27 14:47:16,584 - UTRme - INFO - bedtools complement -i /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/Annot.gff -g /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/sizes.genome
+2020-02-27 14:47:16,616 - UTRme - INFO - bedtools complement had a execution time of: 00:00:00.03
+2020-02-27 14:47:16,700 - UTRme - INFO - > Running bedtools closest!
+
+2020-02-27 14:47:16,700 - UTRme - INFO - bedtools closest -D ref -a /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/intergenic.fasta -b /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/Annot.gff
+2020-02-27 14:47:16,761 - UTRme - INFO - bedtools closest had a execution time of: 00:00:00.06
+2020-02-27 14:47:18,766 - UTRme - INFO - > Running cutadapt secondary region detection!
+
+2020-02-27 14:47:18,766 - UTRme - INFO - cutadapt --quiet --trimmed-only --minimum-length 30 --no-trim -x P1 --cores 30 -e 0.03 --overlap 5 -a CAATATAGTACAGAAACTGTATCAATAATAGCGTTAGTT -g AACTAACGCTATTATTGATACAGTTTCTGTACTATATTG --quality-base 33 -o /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/sr1.fastq.gz /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/qr1.fastq.gz
+2020-02-27 14:49:25,339 - UTRme - INFO - cutadapt secondary region detection had a execution time of: 00:02:06.57
+2020-02-27 14:49:25,339 - UTRme - INFO - > Running cutadapt secondary region detection of second pair!
+
+2020-02-27 14:49:25,339 - UTRme - INFO - cutadapt --quiet --trimmed-only --minimum-length 30 --no-trim -x P2 --cores 30 -e 0.03 --overlap 5 -a CAATATAGTACAGAAACTGTATCAATAATAGCGTTAGTT -g AACTAACGCTATTATTGATACAGTTTCTGTACTATATTG --quality-base 33 -o /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/sr2.fastq.gz /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/qr2.fastq.gz
+2020-02-27 14:51:33,520 - UTRme - INFO - cutadapt secondary region detection of second pair had a execution time of: 00:02:08.18
+2020-02-27 14:51:33,657 - UTRme - INFO - > Running cutadapt reporting!
+
+2020-02-27 14:51:33,658 - UTRme - INFO - cutadapt --quiet --trimmed-only --minimum-length 30 --info-file /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/report -e 0.03 --overlap 5 -a CAATATAGTACAGAAACTGTATCAATAATAGCGTTAGTT -g AACTAACGCTATTATTGATACAGTTTCTGTACTATATTG --quality-base 33 -o /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/srfinal.fastq.gz /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/sr.fastq.gz
+2020-02-27 14:52:50,711 - UTRme - INFO - cutadapt reporting had a execution time of: 00:01:17.05
+2020-02-27 14:52:50,711 - UTRme - INFO - > Running bowtie2!
+
+2020-02-27 14:52:50,711 - UTRme - INFO - bowtie2 --quiet -q --very-sensitive -x /home/psmircich/disco8/UTRme_Epi_Li_v49/genoma/TriTrypDB-46_TcruziCLBrenerEsmeraldo-like_Genome -S /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/Corrida_UTRme-Epi_Li_46-5.sam -U /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/srfinal.fastq.gz -p 30
+2020-02-27 14:53:05,612 - UTRme - INFO - bowtie2 had a execution time of: 00:00:14.90
+2020-02-27 14:53:05,612 - UTRme - INFO - > Running samtools view!
+
+2020-02-27 14:53:05,612 - UTRme - INFO - samtools view -F 4 -bh -@ 30 -o /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/Corrida_UTRme-Epi_Li_46-5.bam /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/Corrida_UTRme-Epi_Li_46-5.sam
+2020-02-27 14:53:14,667 - UTRme - INFO - samtools view had a execution time of: 00:00:09.06
+2020-02-27 14:53:14,766 - UTRme - INFO - > Running samtools sort!
+
+2020-02-27 14:53:14,766 - UTRme - INFO - samtools sort -O bam -@ 30 -T /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/UTRmeSort -o  /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/Corrida_UTRme-Epi_Li_46-5_sort.bam /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/Corrida_UTRme-Epi_Li_46-5.bam
+2020-02-27 14:53:17,154 - UTRme - INFO - samtools sort had a execution time of: 00:00:02.39
+2020-02-27 14:53:17,154 - UTRme - INFO - > Running samtools index!
+
+2020-02-27 14:53:17,154 - UTRme - INFO - samtools index -@ 30 /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/Corrida_UTRme-Epi_Li_46-5_sort.bam
+2020-02-27 14:53:17,552 - UTRme - INFO - samtools index had a execution time of: 00:00:00.40
+2020-02-27 14:59:48,817 - UTRme - INFO - > Reporting 5'UTRs...
+2020-02-27 14:59:54,994 - UTRme - INFO - The analysis of the 5' UTRs has a execution time of: 00:28:04.52.
+2020-02-27 14:59:56,997 - UTRme - INFO - > Running cutadapt secondary region detection!
+
+2020-02-27 14:59:56,997 - UTRme - INFO - cutadapt --quiet --trimmed-only --minimum-length 30 --no-trim -x P1 --cores 30 -e 0.05 --overlap 5 -a A{100} -g T{100} --quality-base 33 -o /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/sr1.fastq.gz /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/qr1.fastq.gz
+2020-02-27 15:02:12,528 - UTRme - INFO - cutadapt secondary region detection had a execution time of: 00:02:15.53
+2020-02-27 15:02:12,528 - UTRme - INFO - > Running cutadapt secondary region detection of second pair!
+
+2020-02-27 15:02:12,528 - UTRme - INFO - cutadapt --quiet --trimmed-only --minimum-length 30 --no-trim -x P2 --cores 30 -e 0.05 --overlap 5 -a A{100} -g T{100} --quality-base 33 -o /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/sr2.fastq.gz /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/qr2.fastq.gz
+2020-02-27 15:04:26,876 - UTRme - INFO - cutadapt secondary region detection of second pair had a execution time of: 00:02:14.35
+2020-02-27 15:04:27,253 - UTRme - INFO - > Running cutadapt reporting!
+
+2020-02-27 15:04:27,253 - UTRme - INFO - cutadapt --quiet --trimmed-only --minimum-length 30 --info-file /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/report -e 0.05 --overlap 5 -a A{100} -g T{100} --quality-base 33 -o /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/srfinal.fastq.gz /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/sr.fastq.gz
+2020-02-27 15:05:40,896 - UTRme - INFO - cutadapt reporting had a execution time of: 00:01:13.64
+2020-02-27 15:05:40,897 - UTRme - INFO - > Running bowtie2!
+
+2020-02-27 15:05:40,897 - UTRme - INFO - bowtie2 --quiet -q --very-sensitive -x /home/psmircich/disco8/UTRme_Epi_Li_v49/genoma/TriTrypDB-46_TcruziCLBrenerEsmeraldo-like_Genome -S /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/Corrida_UTRme-Epi_Li_46-3.sam -U /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/srfinal.fastq.gz -p 30
+2020-02-27 15:06:04,764 - UTRme - INFO - bowtie2 had a execution time of: 00:00:23.87
+2020-02-27 15:06:04,765 - UTRme - INFO - > Running samtools view!
+
+2020-02-27 15:06:04,765 - UTRme - INFO - samtools view -F 4 -bh -@ 30 -o /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/Corrida_UTRme-Epi_Li_46-3.bam /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/Corrida_UTRme-Epi_Li_46-3.sam
+2020-02-27 15:06:12,455 - UTRme - INFO - samtools view had a execution time of: 00:00:07.69
+2020-02-27 15:06:12,527 - UTRme - INFO - > Running samtools sort!
+
+2020-02-27 15:06:12,527 - UTRme - INFO - samtools sort -O bam -@ 30 -T /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/UTRmeSort -o  /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/Corrida_UTRme-Epi_Li_46-3_sort.bam /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/Corrida_UTRme-Epi_Li_46-3.bam
+2020-02-27 15:06:14,764 - UTRme - INFO - samtools sort had a execution time of: 00:00:02.24
+2020-02-27 15:06:14,765 - UTRme - INFO - > Running samtools index!
+
+2020-02-27 15:06:14,765 - UTRme - INFO - samtools index -@ 30 /media/Disco8/pablos/UTRme/UTRme_2020-02-27_14-31-50/temp/Corrida_UTRme-Epi_Li_46-3_sort.bam
+2020-02-27 15:06:15,219 - UTRme - INFO - samtools index had a execution time of: 00:00:00.45
+2020-02-27 15:06:15,238 - UTRme - INFO - > Scoring 3'UTRs...
+2020-02-27 15:12:06,049 - UTRme - INFO - > Reporting 3'UTRs...
+2020-02-27 15:12:10,239 - UTRme - INFO - > The analysis of the 3' UTRs has a execution time of: 00:40:19.77.
+2020-02-27 15:12:14,538 - UTRme - INFO - > The whole program has a execution time of: 00:40:24.06.
+
